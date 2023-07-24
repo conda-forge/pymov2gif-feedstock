@@ -1,5 +1,5 @@
 {% set name = "pymov2gif" %}
-{% set version = "0.0.1" %}
+{% set version = "0.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pymov2gif-{{ version }}.tar.gz
-  sha256: 065998a9fd1f08fe23d7a6b90499c8938f5f923aa9043df8af771d1cf7d39292
+  sha256: 7e483534a0ead72e7be5a8526a1295d0bc68fc9d799a0a8fefe472fd6a295346
 
 build:
   entry_points:
