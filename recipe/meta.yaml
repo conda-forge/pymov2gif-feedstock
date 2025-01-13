@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pymov2gif-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pymov2gif-{{ version }}.tar.gz
   sha256: 7e483534a0ead72e7be5a8526a1295d0bc68fc9d799a0a8fefe472fd6a295346
 
 build:
@@ -14,14 +14,15 @@ build:
     - pymov2gif=pymov2gif.__main__:command_line_parser
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - ffmpeg
     - gifsicle
 
@@ -33,6 +34,7 @@ test:
     - pymov2gif --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/pyscioffice/pymov2gif
