@@ -1,5 +1,5 @@
 {% set name = "pymov2gif" %}
-{% set version = "0.0.2" %}
+{% set version = "0.0.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,20 +7,22 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pymov2gif-{{ version }}.tar.gz
-  sha256: 7e483534a0ead72e7be5a8526a1295d0bc68fc9d799a0a8fefe472fd6a295346
+  sha256: c1177d15cec974996abb9ec97bdb6660e7dacc11cf96d2ace558f53a101ef789
 
 build:
   entry_points:
     - pymov2gif=pymov2gif.__main__:command_line_parser
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 0
 
 requirements:
   host:
     - python {{ python_min }}
     - pip
     - setuptools
+    - hatchling
+    - hatch-vcs
   run:
     - python >={{ python_min }}
     - ffmpeg
