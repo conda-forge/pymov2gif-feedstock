@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  name: pymov2gif
+  version: "0.0.3"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pymov2gif-${{ version }}.tar.gz
+  sha256: c1177d15cec974996abb9ec97bdb6660e7dacc11cf96d2ace558f53a101ef789
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - pymov2gif=pymov2gif.__main__:command_line_parser
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+    - hatchling
+    - hatch-vcs
+  run:
+    - python >=${{ python_min }}
+    - ffmpeg
+    - gifsicle
+
+tests:
+  - python:
+      imports:
+        - pymov2gif
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - pymov2gif --help
+
+about:
+  summary: Similar to the Google authenticator just written in python.
+  license: BSD-3-Clause
+  license_file: LICENSE
+  homepage: https://github.com/pyscioffice/pymov2gif
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
